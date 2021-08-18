@@ -1,0 +1,58 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Asap&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Asap&family=Patrick+Hand&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.body {
+    background-image: url("../assets/backgroundjpg.jpg");
+    background-color: blue;
+    min-height: 100vh;
+    background-size: 100vw 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board {
+    background: linear-gradient(rgb(169, 240, 169), rgb(236, 236, 134));
+    height: 92vmin;
+    width: 92vmin;
+    border: solid black;
+    display: grid;
+    grid-template-rows: repeat(18, 1fr);
+    grid-template-columns: repeat(18, 1fr);
+}
+
+.head {
+    /* background-color: rgb(7, 7, 54); */
+    background: linear-gradient(#C6FFDD, #FBD786, #f7797d);
+    border: solid #380e0f;
+    border-radius: 10px;
+}
+
+.snake {
+    /* background-color: rgb(86, 86, 240); */
+    background: linear-gradient(#bdc3c7, #2c3e50);
+    border: solid #1e3144;
+    border-radius: 16px;
+}
+
+.food {
+    background: linear-gradient(to right, rgb(2, 61, 2), rgb(139, 250, 139));
+    border-radius: 10px;
+    border: solid rgb(7, 79, 7);
+}
+
+#scoreBoard {
+    position: absolute;
+    border: solid black;
+    top: 50px;
+    right: 280px;
+    font-family: 'Asap', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
