@@ -7,6 +7,7 @@ let foodEat = new Audio("./assets/music/food_eat.mp3");
 let gameOver = new Audio("./assets/music/game_over.mp3");
 let scores = 0;
 let hiscoreVal = 0;
+//newx and newy for generating random food element.
 let newx;
 let newy;
 
@@ -37,6 +38,7 @@ function isCollide() {
     return false;
 }
 
+//to ensure food will not place withing snake body.
 function randomFoodPlace() {
     let a = 2;
     let b = 16;
@@ -46,7 +48,6 @@ function randomFoodPlace() {
 
     for (let i = 0; i < snakeArr.length; i++) {
         if (snakeArr[i].x === newx && snakeArr[i].y === newy) {
-            debugger;
             newx = Math.round(a + (b - a) * Math.random());
             newy = Math.round(a + (b - a) * Math.random());
             randomFoodPlace();
@@ -94,9 +95,6 @@ function gameEngine() {
     snakeArr[0].x += moveDirection.x;
     snakeArr[0].y += moveDirection.y;
 
-    //generate snake
-    board.innerHTML = "";
-
     //update scores
     score.innerHTML = "Score: " + scores;
 
@@ -113,6 +111,9 @@ function gameEngine() {
         }
         hiscore.innerHTML = "Hiscore: " + hiscoreVal;
     }
+
+    //generate snake
+    board.innerHTML = "";
 
     snakeArr.forEach((e, index) => {
         snakeElement = document.createElement('div');
@@ -131,8 +132,6 @@ function gameEngine() {
 
     foodElement.classList.add('food');
     board.appendChild(foodElement);
-
-
 }
 
 window.requestAnimationFrame(main);
