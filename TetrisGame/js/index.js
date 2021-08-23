@@ -6,6 +6,8 @@ let lastPaintTime = 0;
 let start = 0;
 let moveDirection = { x: 0, y: 0 };
 let randomShapeIndex = 0;
+let currentShape = [{ x: 9, y: 1 }, { x: 9, y: 2 }, { x: 10, y: 2 }];
+let filledShapes = [];
 
 let shapesArray = [
     [{ x: 9, y: 1 }, { x: 9, y: 2 }, { x: 10, y: 2 }],
@@ -29,18 +31,18 @@ function main(ctime) {
 function isBorder(side, currentShapeIndex) {
 
     if (side == "left") {
-        for (let i = 0; i < shapesArray[currentShapeIndex].length; i++) {
-            if (shapesArray[currentShapeIndex][i].x === 1) return true;
+        for (let i = 0; i < currentShape.length; i++) {
+            if (currentShape[i].x === 1) return true;
         }
     } else if (side == "bottom") {
-        for (let i = 0; i < shapesArray[currentShapeIndex].length; i++) {
-            if (shapesArray[currentShapeIndex][i].y === 19) {
+        for (let i = 0; i < currentShape.length; i++) {
+            if (currentShape[i].y === 19) {
                 return true;
             }
         }
     } else if (side == "right") {
-        for (let i = 0; i < shapesArray[currentShapeIndex].length; i++) {
-            if (shapesArray[currentShapeIndex][i].x === 18) return true;
+        for (let i = 0; i < currentShape.length; i++) {
+            if (currentShape[i].x === 18) return true;
         }
     }
     return false;
@@ -57,24 +59,32 @@ function gameEngine() {
 
     if (isBorder("bottom", randomShapeIndex)) {
         //Generate random Shapes
+        debugger;
+        filledShapes.push(currentShape);
+        console.log("filled");
+        console.log(filledShapes);
         generateRandomShape();
         console.log(randomShapeIndex);
+        currentShape = [{...shapesArray[randomShapeIndex]}];
+        console.log("shape");
+        console.log(shapesArray[randomShapeIndex]);
+        // return;
     }
 
     board.innerHTML = "";
 
-    for (let i = 0; i < shapesArray[randomShapeIndex].length; i++) {
+    for (let i = 0; i < currentShape.length; i++) {
         elem = document.createElement('div');
-        elem.style.gridColumnStart = shapesArray[randomShapeIndex][i].x;
-        elem.style.gridRowStart = shapesArray[randomShapeIndex][i].y;
+        elem.style.gridColumnStart = currentShape[i].x;
+        elem.style.gridRowStart = currentShape[i].y;
 
         elem.classList.add('element');
         board.appendChild(elem);
     }
 
     //move the shape down
-    for (let i = 0; i < shapesArray[randomShapeIndex].length; i++) {
-        shapesArray[randomShapeIndex][i].y += start;
+    for (let i = 0; i < currentShape.length; i++) {
+        currentShape[i].y += start;
     }
 }
 
@@ -94,15 +104,15 @@ window.addEventListener("keydown", e => {
             break;
         case "ArrowLeft":
             if (!isBorder("left", randomShapeIndex)) {
-                for (let i = 0; i < shapesArray[randomShapeIndex].length; i++) {
-                    shapesArray[randomShapeIndex][i].x -= 1;
+                for (let i = 0; i < currentShape.length; i++) {
+                    currentShape[i].x -= 1;
                 }
             }
             break;
         case "ArrowRight":
             if (!isBorder("right", randomShapeIndex)) {
-                for (let i = 0; i < shapesArray[randomShapeIndex].length; i++) {
-                    shapesArray[randomShapeIndex][i].x += 1;
+                for (let i = 0; i < currentShape.length; i++) {
+                    currentShape[i].x += 1;
                 }
             }
             break;
