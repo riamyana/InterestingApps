@@ -59,13 +59,13 @@ function gameEngine() {
 
     if (isBorder("bottom", randomShapeIndex)) {
         //Generate random Shapes
-        debugger;
         filledShapes.push(currentShape);
         console.log("filled");
         console.log(filledShapes);
         generateRandomShape();
         console.log(randomShapeIndex);
         
+        //To avoid reference problem
         currentShape = new Array();
         currentShape = JSON.parse(JSON.stringify(shapesArray[randomShapeIndex]));
         console.log("currentShape");
@@ -76,6 +76,7 @@ function gameEngine() {
         // return;
     }
 
+    //add shape to board
     board.innerHTML = "";
 
     for (let i = 0; i < currentShape.length; i++) {
@@ -85,6 +86,19 @@ function gameEngine() {
 
         elem.classList.add('element');
         board.appendChild(elem);
+    }
+
+
+    //add filled shapes to board
+    for (let i = 0; i < filledShapes.length; i++) {
+        for (let j = 0; j < filledShapes[i].length; j++) {
+            elem = document.createElement('div');
+            elem.style.gridColumnStart = filledShapes[i][j].x;
+            elem.style.gridRowStart = filledShapes[i][j].y;
+
+            elem.classList.add('element');
+            board.appendChild(elem);
+        }
     }
 
     //move the shape down
