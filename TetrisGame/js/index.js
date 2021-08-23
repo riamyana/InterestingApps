@@ -65,7 +65,12 @@ function gameEngine() {
         console.log(filledShapes);
         generateRandomShape();
         console.log(randomShapeIndex);
-        currentShape = [{...shapesArray[randomShapeIndex]}];
+        
+        currentShape = new Array();
+        currentShape = JSON.parse(JSON.stringify(shapesArray[randomShapeIndex]));
+        console.log("currentShape");
+        console.log(currentShape);
+
         console.log("shape");
         console.log(shapesArray[randomShapeIndex]);
         // return;
